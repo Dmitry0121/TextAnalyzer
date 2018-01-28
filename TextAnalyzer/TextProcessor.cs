@@ -2,30 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TextAnalyzer.Core
+namespace TextAnalyzer
 {
     public class TextProcessor
     {
         private string _text;
         
-        public string Text
+        public TextProcessor(string pText)
         {
-            get
+            if (String.IsNullOrEmpty(pText))
             {
-                return this._text;
+                throw new Exception("Text can not be empty or null");
             }
-            set
-            {
-                this._text = value;
-            }
+            
+            this._text = pText;
         }
 
-        public TextProcessor(string pText)
+        public string GetText()
+        {
+            return this._text;
+        }
+
+        public void ChangeText(string pText)
         {
             this._text = pText;
         }
 
-        #region public methods of analysis
+        //methods of analysis
         public int CountAllChars()
         {
             return this._text.Length;
@@ -55,19 +58,12 @@ namespace TextAnalyzer.Core
 
         public char MostPopularChar()
         {
-            try
-            {
-                return this._text
-                    .ToLower()
-                    .GroupBy(c => c)
-                    .OrderByDescending(g => g.Count())
-                    .First()
-                    .Key;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return this._text
+                .ToLower()
+                .GroupBy(c => c)
+                .OrderByDescending(g => g.Count())
+                .First()
+                .Key;
         }
 
         public Dictionary<string, int> CountEachWord()
@@ -89,15 +85,12 @@ namespace TextAnalyzer.Core
 
             return dictionary;
         }
-        #endregion
 
-        #region private methods
         private string[] GetArrayWords(string pText)
         {
             return pText
                 .ToLower()
                 .Split(" ,.:;+-*?!\'()\"".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         }
-        #endregion
     }
 }

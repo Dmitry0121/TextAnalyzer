@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\TextProcessor.cs" />
+    <Compile Include="C:\Users\Макаренко Дмитрии\Desktop\TextProcessor.cs">
+      <Link>TextProcessor.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

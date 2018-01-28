@@ -1,5 +1,5 @@
 ﻿using System;
-using TextAnalyzer.Core;
+using TextAnalyzer;
 
 namespace UserApplication
 {
@@ -14,25 +14,17 @@ namespace UserApplication
             
             TextProcessor myTextProcessor = new TextProcessor(text);
 
-            Console.WriteLine("Text has " + 
-                myTextProcessor.CountAllChars()
-            + " letters");
+            Console.WriteLine("Text has " + myTextProcessor.CountAllChars() + " letters");
 
             char searchChar = 'р';
-            Console.WriteLine("Text contains " +
-                myTextProcessor.CountChar(searchChar)
-            + " letter(s) " + "\"" + searchChar + "\"");
+            Console.WriteLine("Text contains " + myTextProcessor.CountChar(searchChar) + " letter(s) " + "\"" + searchChar + "\"");
 
-            myTextProcessor.Text = "How you doing?";
-            Console.WriteLine("Text changed. New text \"" + myTextProcessor.Text + "\"");
+            myTextProcessor.ChangeText("How you doing?");
+            Console.WriteLine("Text changed. New text \"" + myTextProcessor.GetText() + "\"");
 
-            Console.WriteLine("Text contains " +
-                myTextProcessor.CountQuestionSentence()
-            + " question sentence");
+            Console.WriteLine("Text contains " + myTextProcessor.CountQuestionSentence() + " question sentence");
 
-            Console.WriteLine("\"" +
-                myTextProcessor.MostPopularChar()
-            + "\" is the most popular letter");
+            Console.WriteLine("\"" + myTextProcessor.MostPopularChar() + "\" is the most popular letter");
 
             var words = myTextProcessor.CountEachWord();
 

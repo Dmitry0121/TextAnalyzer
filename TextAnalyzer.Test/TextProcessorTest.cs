@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TextAnalyzer.Core;
 using System.Collections.Generic;
+using System;
 
 namespace TextAnalyzer.Test
 {
@@ -20,72 +20,93 @@ namespace TextAnalyzer.Test
         public void CountAllChars_Valid_TheSameCount()
         {
             //arrange
-            int count = TEST_TEXT.Length;
+            int expected = TEST_TEXT.Length;
 
             //act
-            var result = this._textProcessor.CountAllChars();
+            var actual = this._textProcessor.CountAllChars();
 
             //assert
-            Assert.AreEqual(count, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void CountChar_Valid_TheSameCountChar()
+        public void CountChar_Valid_TheSameCount()
         {
             //arrange
             char searchChar = 't';
-            int count = 2;
+            int expected = 2;
 
             //act
-            var result = this._textProcessor.CountChar(searchChar);
+            var actual = this._textProcessor.CountChar(searchChar);
 
             //assert
-            Assert.AreEqual(count, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void CountQuestionSentence_Valid_TheSameCountQuestionSentence()
+        public void CountQuestionSentence_Valid_TheSameCount()
         {
             //arrange
-            int count = 0;
+            int expected = 0;
 
-            //actCountQuestionSentence
-            var result = this._textProcessor.CountQuestionSentence();
+            //act
+            var actual = this._textProcessor.CountQuestionSentence();
 
             //assert
-            Assert.AreEqual(count, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void MostPopularChar_Valid_TheSameCountMostPopularChar()
+        public void MostPopularChar_Valid_TheSameChar()
         {
             //arrange
-            char MostPopularChar = 't';
+            char expected = 't';
 
             //act
-            var result = this._textProcessor.MostPopularChar();
+            var actual = this._textProcessor.MostPopularChar();
 
             //assert
-            Assert.AreEqual(MostPopularChar, result);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void CountEachWord_Valid_TheSameCountEachWord()
+        public void CountEachWord_Valid_TheSameCount()
         {
             //arrange
-            var dictionary = new Dictionary<string, int>();
-            dictionary.Add(TEST_TEXT, 1);
+            var expected = new Dictionary<string, int>();
+            expected.Add(TEST_TEXT, 1);
 
             //act
-            var result = this._textProcessor.CountEachWord();
+            var actual = this._textProcessor.CountEachWord();
 
             //assert
-            Assert.IsTrue(dictionary.Count == result.Count);
+            Assert.IsTrue(expected.Count == actual.Count);
 
-            foreach (KeyValuePair<string, int> keyValue in result)
+            foreach (KeyValuePair<string, int> item in actual)
             {
-                Assert.IsTrue(keyValue.Value == dictionary[keyValue.Key]);
+                Assert.IsTrue(item.Value == expected[item.Key]);
             }
-        }    
+        }
+
+        [TestMethod]
+        public void ChangeText_Valid_TheSameText()
+        {
+            //arrange
+            string expected = "new";
+
+            //act
+            this._textProcessor.ChangeText(expected);
+
+            //assert
+            string actual = this._textProcessor.GetText();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void CreateObjectWithTextNullOrEmpty_Valid_Exception()
+        {
+            TextProcessor actual = new TextProcessor(null);
+        }
     }
 }
